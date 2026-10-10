@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-950">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>E-CM | Ustensiles de cuisine & Électroménager - Issa Camara</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecm: {
+              green: '#034B22',
+              'green-dark': '#023317',
+              'green-light': '#08582B',
+              'green-soft': '#E6F4EC',
+              orange: '#FF5722',
+              'orange-hover': '#F24E1E',
+              bg: '#F5F7F6',
+              card: '#FFFFFF',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom UI Polish */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .screen-fade {
+      animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .glass-morphism {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="h-full font-sans antialiased bg-slate-950 text-slate-800 flex justify-center items-center sm:py-4">
+
+  <!-- Mobile Frame Container -->
+  <div id="app" class="w-full max-w-md h-full sm:h-[852px] bg-ecm-bg sm:rounded-[44px] shadow-2xl flex flex-col overflow-hidden relative border-0 sm:border-[10px] sm:border-slate-800">
+    
+    <!-- Top Mobile Status Bar -->
+    <header class="bg-ecm-green text-white px-6 pt-3 pb-2 flex justify-between items-center text-xs font-semibold z-50 shrink-0">
+      <span id="current-time" class="font-bold tracking-tight">09:41</span>
+      <!-- Dynamic Owner Pill -->
+      <div class="flex items-center space-x-1.5 bg-black/20 px-2 py-0.5 rounded-full text-[10px] font-medium border border-white/10">
+        <i data-lucide="shield-check" class="w-3 h-3 text-emerald-400"></i>
+        <span>Créateur : Issa Camara</span>
+      </div>
+      <div class="flex items-center space-x-1.5">
+        <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+        <i data-lucide="battery" class="w-4 h-4"></i>
+      </div>
+    </header>
+
+    <!-- MAIN DYNAMIC CONTENT SCROLL AREA -->
+    <main id="main-content" class="flex-1 overflow-y-auto relative no-scrollbar pb-20">
+      <!-- Screens injected by JS Router -->
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav id="bottom-nav" class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200/80 px-2 py-2 flex justify-around items-center z-40 rounded-b-none sm:rounded-b-[34px] shadow-2xl">
+      <button onclick="navigateTo('home')" id="nav-home" class="nav-btn flex flex-col items-center py-1 px-3 rounded-xl text-ecm-green font-bold transition">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-0.5">Accueil</span>
+      </button>
+      <button onclick="navigateTo('catalog')" id="nav-catalog" class="nav-btn flex flex-col items-center py-1 px-3 rounded-xl text-slate-400 font-medium hover:text-ecm-green transition">
+        <i data-lucide="layout-grid" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-0.5">Catalogue</span>
+      </button>
+      <button onclick="navigateTo('cart')" id="nav-cart" class="nav-btn flex flex-col items-center py-1 px-3 rounded-xl text-slate-400 font-medium hover:text-ecm-green transition relative">
+        <div class="relative">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cart-badge" class="absolute -top-1.5 -right-2.5 bg-ecm-orange text-white text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center hidden border-2 border-white">0</span>
+        </div>
+        <span class="text-[10px] mt-0.5">Panier</span>
+      </button>
+      <button onclick="navigateTo('account')" id="nav-account" class="nav-btn flex flex-col items-center py-1 px-3 rounded-xl text-slate-400 font-medium hover:text-ecm-green transition">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-0.5">Compte</span>
+      </button>
+    </nav>
+
+    <!-- Global Toast Notification -->
+    <div id="toast" class="absolute top-14 left-1/2 -translate-x-1/2 bg-slate-900/95 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-xl z-50 flex items-center space-x-2 transition-all duration-300 opacity-0 pointer-events-none transform -translate-y-4 border border-slate-700">
+      <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+      <span id="toast-message">Notification</span>
+    </div>
+
+    <!-- ADMIN PIN LOCK MODAL FOR MODIFICATION RESTRICTION -->
+    <div id="admin-lock-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+      <div class="bg-white w-full max-w-xs rounded-3xl p-6 shadow-2xl text-center space-y-4 border border-slate-100 screen-fade relative">
+        <button onclick="closeAdminLockModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        
+        <div class="w-14 h-14 bg-ecm-green/10 text-ecm-green rounded-2xl flex items-center justify-center mx-auto border border-ecm-green/20">
+          <i data-lucide="lock" class="w-7 h-7"></i>
+        </div>
+
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">Accès Administrateur</h3>
+          <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">
+            Seul <span class="font-bold text-ecm-green">Issa Camara</span> est autorisé à modifier le catalogue, les prix et les photos de l'application.
+          </p>
+        </div>
+
+        <form onsubmit="verifyAdminPin(event)" class="space-y-3 pt-2">
+          <div>
+            <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Entrez le Code PIN d'accès</label>
+            <input id="admin-pin-input" type="password" maxlength="6" placeholder="• • • •" class="w-full text-center tracking-widest text-lg font-bold p-3 bg-slate-100 border border-slate-200 rounded-xl focus:outline-none focus:border-ecm-green">
+            <p id="pin-error" class="text-[10px] text-red-500 font-bold mt-1 hidden">Code PIN incorrect ! Seul Issa Camara possède l'accès.</p>
+          </div>
+
+          <button type="submit" class="w-full bg-ecm-green hover:bg-ecm-green-light text-white py-3 rounded-xl font-bold text-xs shadow-md transition">
+            Déverrouiller la gestion
+          </button>
+        </form>
+
+        <p class="text-[9px] text-slate-400 italic">Code PIN par défaut : <span class="font-mono font-bold text-slate-600">1234</span></p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    
+    // --- APP DATA STATE ---
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'prod-1',
+        name: 'Friteuse sans huile 8L',
+        category: 'Electromenager',
+        price: 69900,
+        oldPrice: 79900,
+        badge: 'En stock',
+        image: 'https://images.unsplash.com/photo-1626143509930-b18429ef994e?w=600&auto=format&fit=crop&q=80',
+        rating: 4.8,
+        reviewsCount: 128,
+        description: 'Profitez de repas sains et savoureux avec cette friteuse sans huile 8L sélectionnée par Issa Camara. Cuisson uniforme, économie d\'énergie et écran tactile intuitif.',
+        specs: ['Capacité: 8 Litres', 'Écran tactile LED', 'Température réglable (80°C - 200°C)', 'Minuterie intégrée', 'Facile à nettoyer']
+      },
+      {
+        id: 'prod-2',
+        name: 'Blender professionnel 2L',
+        category: 'Electromenager',
+        price: 39900,
+        oldPrice: 45000,
+        badge: 'Populaire',
+        image: 'https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=600&auto=format&fit=crop&q=80',
+        rating: 4.7,
+        reviewsCount: 94,
+        description: 'Blender ultra puissant idéal pour smoothies, jus glacés et soupes. Lames en acier inox renforcé pour une durabilité maximale.',
+        specs: ['Moteur 1800W', 'Bol résistant de 2 Litres', '6 Lames inox dentelées', 'Variateur de vitesse']
+      },
+      {
+        id: 'prod-3',
+        name: 'Set de casseroles inox 10 pcs',
+        category: 'Ustensiles',
+        price: 49900,
+        oldPrice: 58000,
+        badge: 'Bestseller',
+        image: 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=600&auto=format&fit=crop&q=80',
+        rating: 4.9,
+        reviewsCount: 210,
+        description: 'Ensemble complet de cuisine premium en acier inoxydable 18/10. Compatible tous feux dont induction.',
+        specs: ['Inox haute qualité', 'Fond thermo-diffuseur', 'Couvercles en verre trempé', 'Poignées ergonomiques']
+      },
+      {
+        id: 'prod-4',
+        name: 'Bouilloire électrique 1.7L',
+        category: 'Petits appareils',
+        price: 12900,
+        oldPrice: 15000,
+        badge: 'Promo',
+        image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f6?w=600&auto=format&fit=crop&q=80',
+        rating: 4.5,
+        reviewsCount: 67,
+        description: 'Bouilloire rapide et élégante en finition brossée avec arrêt automatique et sécurité anti-chauffe à sec.',
+        specs: ['Capacité 1.7L', 'Puissance 2200W', 'Socle 360°', 'Filtre amovible']
+      },
+      {
+        id: 'prod-5',
+        name: 'Micro-ondes 20L Numérique',
+        category: 'Electromenager',
+        price: 54900,
+        oldPrice: 62000,
+        badge: 'En stock',
+        image: 'https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&auto=format&fit=crop&q=80',
+        rating: 4.6,
+        reviewsCount: 82,
+        description: 'Micro-ondes moderne avec programmes automatiques de décongélation et réchauffage rapide.',
+        specs: ['Capacité 20L', '700W de puissance', '8 programmes', 'Écran digital']
+      },
+      {
+        id: 'prod-6',
+        name: 'Set de couteaux de cuisine 6 pcs',
+        category: 'Ustensiles',
+        price: 19900,
+        oldPrice: 24000,
+        badge: 'Top Qualité',
+        image: 'https://images.unsplash.com/photo-1593618998160-e34014e67546?w=600&auto=format&fit=crop&q=80',
+        rating: 4.8,
+        reviewsCount: 115,
+        description: 'Bloc de couteaux professionnels affûtés avec précision pour toutes vos découpes en cuisine.',
+        specs: ['Acier inox haute précision', 'Bloc support bois incliné', 'Ciseaux inclus', 'Aiguiseur de précision']
+      }
+    ];
+
+    // Local Storage Hydration
+    let products = JSON.parse(localStorage.getItem('ecm_products')) || DEFAULT_PRODUCTS;
+    let cart = JSON.parse(localStorage.getItem('ecm_cart')) || [];
+    let favorites = JSON.parse(localStorage.getItem('ecm_favorites')) || ['prod-1', 'prod-3'];
+    let orders = JSON.parse(localStorage.getItem('ecm_orders')) || [
+      {
+        id: 'E-CM20250926',
+        date: '26 sept. 2025 - 14:32',
+        status: 'En préparation',
+        items: [
+          { name: 'Friteuse sans huile 8L', price: 69900, qty: 1, image: 'https://images.unsplash.com/photo-1626143509930-b18429ef994e?w=300&auto=format&fit=crop&q=80' },
+          { name: 'Blender professionnel 2L', price: 39900, qty: 1, image: 'https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=300&auto=format&fit=crop&q=80' }
+        ],
+        subtotal: 109800,
+        shipping: 2000,
+        total: 111800,
+        address: 'Ouagadougou, Burkina Faso',
+        paymentMethod: 'Orange Money'
+      }
+    ];
+
+    let isAdminUnlocked = false; // Admin status requirement
+    let activeTab = 'home';
+    let selectedCategory = 'Tous';
+    let searchQuery = '';
+    let activeProductDetail = null;
+    let activeOrderId = 'E-CM20250926';
+
+    function saveData() {
+      localStorage.setItem('ecm_products', JSON.stringify(products));
+      localStorage.setItem('ecm_cart', JSON.stringify(cart));
+      localStorage.setItem('ecm_favorites', JSON.stringify(favorites));
+      localStorage.setItem('ecm_orders', JSON.stringify(orders));
+      updateCartBadge();
+    }
+
+    function formatPrice(amount) {
+      return new Intl.NumberFormat('fr-FR').format(amount) + ' F CFA';
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = msg;
+      toast.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2600);
+    }
+
+    function updateCartBadge() {
+      const badge = document.getElementById('cart-badge');
+      const count = cart.reduce((acc, item) => acc + item.qty, 0);
+      if (count > 0) {
+        badge.textContent = count;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    // ADMIN SECURITY ACCESS LOCK
+    function openAdminLockModal() {
+      if (isAdminUnlocked) {
+        navigateTo('admin');
+      } else {
+        document.getElementById('admin-lock-modal').classList.remove('hidden');
+        document.getElementById('admin-pin-input').value = '';
+        document.getElementById('pin-error').classList.add('hidden');
+      }
+    }
+
+    function closeAdminLockModal() {
+      document.getElementById('admin-lock-modal').classList.add('hidden');
+    }
+
+    function verifyAdminPin(e) {
+      e.preventDefault();
+      const pin = document.getElementById('admin-pin-input').value;
+      if (pin === '1234' || pin.toLowerCase() === 'issa') {
+        isAdminUnlocked = true;
+        closeAdminLockModal();
+        showToast('Session Administrateur active : Issa Camara');
+        navigateTo('admin');
+      } else {
+        document.getElementById('pin-error').classList.remove('hidden');
+      }
+    }
+
+    function navigateTo(tab, extraData = null) {
+      activeTab = tab;
+      const main = document.getElementById('main-content');
+      const bottomNav = document.getElementById('bottom-nav');
+      
+      // Update nav tab highlights
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-ecm-green', 'font-bold');
+        btn.classList.add('text-slate-400', 'font-medium');
+      });
+
+      const currentNavBtn = document.getElementById(`nav-${tab}`);
+      if (currentNavBtn) {
+        currentNavBtn.classList.remove('text-slate-400', 'font-medium');
+        currentNavBtn.classList.add('text-ecm-green', 'font-bold');
+      }
+
+      // Hide bottom nav on specific screens
+      if (['splash', 'onboarding', 'checkout-step1', 'checkout-step2', 'order-success'].includes(tab)) {
+        bottomNav.classList.add('hidden');
+      } else {
+        bottomNav.classList.remove('hidden');
+      }
+
+      // Render tab view
+      switch (tab) {
+        case 'splash': renderSplashScreen(); break;
+        case 'onboarding': renderOnboardingScreen(); break;
+        case 'home': renderHomeScreen(); break;
+        case 'catalog': renderCatalogScreen(); break;
+        case 'product-detail':
+          if (extraData) activeProductDetail = extraData;
+          renderProductDetailScreen(activeProductDetail);
+          break;
+        case 'cart': renderCartScreen(); break;
+        case 'checkout-step1': renderCheckoutStep1(); break;
+        case 'checkout-step2': renderCheckoutStep2(); break;
+        case 'order-success': renderOrderSuccessScreen(extraData); break;
+        case 'order-tracking':
+          if (extraData) activeOrderId = extraData;
+          renderOrderTrackingScreen(activeOrderId);
+          break;
+        case 'account': renderAccountScreen(); break;
+        case 'favorites': renderFavoritesScreen(); break;
+        case 'notifications': renderNotificationsScreen(); break;
+        case 'contact': renderContactScreen(); break;
+        case 'admin': renderAdminScreen(); break;
+        default: renderHomeScreen();
+      }
+
+      lucide.createIcons();
+      main.scrollTop = 0;
+    }
+
+    function renderSplashScreen() {
+      const main = document.getElementById('main-content');
+      main.innerHTML = `
+        <div class="h-full bg-gradient-to-b from-ecm-green-dark via-ecm-green to-ecm-green text-white p-6 flex flex-col justify-between items-center text-center screen-fade">
+          <div class="pt-10">
+            <div class="w-20 h-20 bg-ecm-orange rounded-3xl flex items-center justify-center mx-auto shadow-2xl mb-4 border-2 border-white/20">
+              <i data-lucide="shopping-cart" class="w-10 h-10 text-white"></i>
+            </div>
+            <h1 class="text-3xl font-black tracking-tight">E-CM</h1>
+            <p class="text-[11px] text-emerald-200 uppercase tracking-widest font-extrabold mt-1">Ustensiles de cuisine & Électroménager</p>
+            <span class="inline-block mt-3 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-emerald-100 font-semibold border border-white/15">
+              Édité par Issa Camara
+            </span>
+          </div>
+
+          <div class="my-auto space-y-4">
+            <h2 class="text-xl font-extrabold leading-snug px-4">Tout pour votre cuisine et votre maison au Burkina Faso</h2>
+            <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto pt-2">
+              <img src="https://images.unsplash.com/photo-1626143509930-b18429ef994e?w=300&auto=format&fit=crop&q=80" class="rounded-2xl shadow-lg h-28 w-full object-cover border border-white/20" />
+              <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=300&auto=format&fit=crop&q=80" class="rounded-2xl shadow-lg h-28 w-full object-cover border border-white/20" />
+            </div>
+          </div>
+
+          <div class="w-full pb-4">
+            <button onclick="navigateTo('onboarding')" class="w-full bg-ecm-orange hover:bg-ecm-orange-hover text-white py-4 rounded-2xl font-bold shadow-xl transition flex items-center justify-center space-x-2">
+              <span>Découvrir l'application</span>
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderOnboardingScreen() {
+      const main = document.getElementById('main-content');
+      main.innerHTML = `
+        <div class="h-full bg-white text-slate-800 p-6 flex flex-col justify-between items-center text-center screen-fade">
+          <div class="pt-4 w-full flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+              <div class="w-8 h-8 bg-ecm-orange rounded-xl flex items-center justify-center shadow-md">
+                <i data-lucide="shopping-cart" class="w-4 h-4 text-white"></i>
+              </div>
+              <span class="font-extrabold text-ecm-green text-base">E-CM</span>
+            </div>
+            <button onclick="navigateTo('home')" class="text-xs text-slate-400 font-bold uppercase tracking-wider">Passer</button>
+          </div>
+
+          <div class="my-auto space-y-4">
+            <div class="relative max-w-xs mx-auto">
+              <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop&q=80" class="rounded-3xl shadow-xl w-full h-60 object-cover" />
+              <div class="absolute -bottom-3 -right-2 bg-white px-3 py-2 rounded-xl shadow-lg border border-slate-100 flex items-center space-x-2">
+                <i data-lucide="award" class="w-4 h-4 text-emerald-600"></i>
+                <span class="text-[11px] font-bold text-slate-800">100% Qualité Certifiée</span>
+              </div>
+            </div>
+            
+            <div class="pt-4 space-y-2">
+              <h2 class="text-2xl font-black text-slate-900">Bienvenue sur E-CM</h2>
+              <p class="text-xs text-slate-500 leading-relaxed px-4">
+                La référence des ustensiles et de l'électroménager de qualité à Ouagadougou. Fondé et géré par <span class="font-bold text-ecm-green">Issa Camara</span>.
+              </p>
+            </div>
+
+            <!-- Carousel dots -->
+            <div class="flex justify-center space-x-1.5 pt-2">
+              <span class="w-2 h-2 rounded-full bg-slate-200"></span>
+              <span class="w-6 h-2 rounded-full bg-ecm-orange"></span>
+              <span class="w-2 h-2 rounded-full bg-slate-200"></span>
+            </div>
+          </div>
+
+          <div class="w-full space-y-2.5 pb-2">
+            <button onclick="navigateTo('home')" class="w-full bg-ecm-orange hover:bg-ecm-orange-hover text-white py-3.5 rounded-2xl font-bold text-xs shadow-lg transition">
+              Commencer
+            </button>
+            <button onclick="navigateTo('account')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 rounded-2xl font-semibold text-xs transition">
+              Mon profil
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderHomeScreen() {
+      const main = document.getElementById('main-content');
+      
+      const filtered = products.filter(p => {
+        const matchesCat = selectedCategory === 'Tous' || p.category === selectedCategory;
+        const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCat && matchesSearch;
+      });
+
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          
+          <!-- Header Bar -->
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-10 h-10 bg-ecm-orange rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/20">
+                <i data-lucide="shopping-bag" class="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <h1 class="font-black text-ecm-green text-xl leading-none tracking-tight">E-CM</h1>
+                <p class="text-[10px] text-slate-500 font-semibold mt-0.5">Ustensiles & Électroménager</p>
+              </div>
+            </div>
+
+            <button onclick="openAdminLockModal()" class="bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-ecm-green p-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 border border-slate-200 transition">
+              <i data-lucide="shield-lock" class="w-4 h-4 text-ecm-green"></i>
+              <span class="text-[11px]">Espace Admin</span>
+            </button>
+          </div>
+
+          <!-- Strict Creator Banner -->
+          <div class="bg-white border border-slate-200/80 rounded-xl p-2.5 flex items-center justify-between text-[11px] shadow-sm">
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-slate-600 font-medium">Créateur & Administrateur unique : <strong class="text-slate-900">Issa Camara</strong></span>
+            </div>
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-ecm-green"></i>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input 
+              type="text" 
+              placeholder="Rechercher un article de cuisine..." 
+              value="${searchQuery}"
+              oninput="searchQuery = this.value; renderHomeScreen();"
+              class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-2xl text-xs font-medium focus:outline-none focus:border-ecm-green shadow-sm"
+            />
+          </div>
+
+          <!-- Hero Promo Banner -->
+          <div class="bg-gradient-to-br from-ecm-green via-ecm-green-light to-emerald-900 rounded-3xl p-4 text-white shadow-xl relative overflow-hidden flex justify-between items-center">
+            <div class="space-y-2 z-10 max-w-[62%]">
+              <span class="bg-ecm-orange text-[9px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider">Qualité Garantie</span>
+              <h2 class="text-base font-extrabold leading-tight">Votre cuisine, notre passion !</h2>
+              <p class="text-[10px] text-emerald-100 leading-snug">Équipements haut de gamme au meilleur prix à Ouagadougou.</p>
+              <button onclick="navigateTo('catalog')" class="mt-1 bg-ecm-orange hover:bg-ecm-orange-hover text-white text-[11px] font-bold px-3.5 py-1.5 rounded-xl shadow-md transition inline-block">
+                Découvrir
+              </button>
+            </div>
+            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=300&auto=format&fit=crop&q=80" class="w-28 h-28 object-cover rounded-2xl shadow-xl border-2 border-white/20 transform rotate-3 shrink-0" />
+          </div>
+
+          <!-- Category Pills -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider">Catégories</h3>
+              <button onclick="navigateTo('catalog')" class="text-xs text-ecm-green font-bold">Voir tout &gt;</button>
+            </div>
+            <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1">
+              ${['Tous', 'Ustensiles', 'Electromenager', 'Petits appareils'].map(cat => `
+                <button 
+                  onclick="selectedCategory='${cat}'; renderHomeScreen();"
+                  class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition ${selectedCategory === cat ? 'bg-ecm-green text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200/80'}"
+                >
+                  ${cat}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Popular Products Grid -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <h3 class="text-xs font-extrabold text-slate-900 uppercase tracking-wider">Produits populaires</h3>
+              <span class="text-[11px] text-slate-400 font-semibold">${filtered.length} article(s)</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              ${filtered.map(product => renderProductCard(product)).join('')}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function renderCatalogScreen() {
+      const main = document.getElementById('main-content');
+      const categories = ['Tous', 'Ustensiles', 'Electromenager', 'Petits appareils'];
+
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          
+          <div class="flex items-center justify-between pt-1">
+            <h1 class="text-lg font-extrabold text-slate-900">Catalogue complet</h1>
+            <button onclick="navigateTo('home')" class="p-1 text-slate-500 hover:text-ecm-green">
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input 
+              type="text" 
+              placeholder="Rechercher dans le catalogue..." 
+              value="${searchQuery}"
+              oninput="searchQuery = this.value; renderCatalogScreen();"
+              class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-2xl text-xs font-medium focus:outline-none focus:border-ecm-green shadow-sm"
+            />
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1">
+            ${categories.map(cat => `
+              <button 
+                onclick="selectedCategory='${cat}'; renderCatalogScreen();"
+                class="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition ${selectedCategory === cat ? 'bg-ecm-green text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200'}"
+              >
+                ${cat}
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Render Categories -->
+          ${categories.filter(c => c !== 'Tous').map(category => {
+            if (selectedCategory !== 'Tous' && selectedCategory !== category) return '';
+            const items = products.filter(p => p.category === category && p.name.toLowerCase().includes(searchQuery.toLowerCase()));
+            if (items.length === 0) return '';
+
+            return `
+              <div class="space-y-2 pt-2">
+                <div class="flex justify-between items-center">
+                  <h2 class="text-xs font-black text-ecm-green uppercase tracking-wider">${category}</h2>
+                  <span class="text-[10px] text-slate-400 font-semibold">${items.length} disponible(s)</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  ${items.map(product => renderProductCard(product)).join('')}
+                </div>
+              </div>
+            `;
+          }).join('')}
+
+        </div>
+      `;
+    }
+
+    // Product Card Component
+    function renderProductCard(product) {
+      const isFav = favorites.includes(product.id);
+      return `
+        <div class="bg-white rounded-2xl p-2.5 shadow-sm border border-slate-100 flex flex-col justify-between relative group hover:shadow-md transition">
+          <button 
+            onclick="toggleFavorite('${product.id}'); event.stopPropagation();" 
+            class="absolute top-4 right-4 z-10 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm text-slate-400 hover:text-red-500 transition"
+          >
+            <i data-lucide="heart" class="w-4 h-4 ${isFav ? 'fill-red-500 text-red-500' : ''}"></i>
+          </button>
+
+          <div onclick="navigateTo('product-detail', '${product.id}')" class="cursor-pointer space-y-2">
+            <div class="h-32 w-full bg-slate-50 rounded-xl overflow-hidden relative border border-slate-100">
+              <img src="${product.image}" onerror="this.src='https://placehold.co/300x300/034B22/FFFFFF?text=E-CM+Produit'" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              ${product.badge ? `<span class="absolute bottom-2 left-2 bg-slate-900/80 backdrop-blur-md text-white text-[9px] font-extrabold px-2 py-0.5 rounded-md">${product.badge}</span>` : ''}
+            </div>
+
+            <div>
+              <h4 class="text-xs font-bold text-slate-800 line-clamp-1">${product.name}</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5 font-medium">${product.category}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-slate-50 mt-2">
+            <div>
+              <p class="text-xs font-black text-ecm-green">${formatPrice(product.price)}</p>
+              ${product.oldPrice ? `<p class="text-[9px] text-slate-400 line-through">${formatPrice(product.oldPrice)}</p>` : ''}
+            </div>
+            <button 
+              onclick="addToCart('${product.id}'); event.stopPropagation();" 
+              class="w-7 h-7 bg-ecm-green hover:bg-ecm-green-light text-white rounded-lg flex items-center justify-center shadow-sm active:scale-95 transition"
+            >
+              <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderProductDetailScreen(productId) {
+      const main = document.getElementById('main-content');
+      const product = products.find(p => p.id === productId) || products[0];
+      const isFav = favorites.includes(product.id);
+
+      main.innerHTML = `
+        <div class="space-y-4 pb-6 screen-fade">
+          
+          <div class="p-4 flex items-center justify-between bg-white border-b border-slate-100">
+            <button onclick="navigateTo('home')" class="p-1 text-slate-600 hover:bg-slate-100 rounded-lg">
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-xs font-extrabold text-slate-800 truncate max-w-[200px]">${product.name}</h1>
+            <div class="flex items-center space-x-2">
+              <button onclick="toggleFavorite('${product.id}')" class="p-1 text-slate-600 hover:text-red-500">
+                <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500 text-red-500' : ''}"></i>
+              </button>
+              <button onclick="showToast('Lien du produit copié !')" class="p-1 text-slate-600">
+                <i data-lucide="share-2" class="w-5 h-5"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="px-4">
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 relative h-64">
+              <img src="${product.image}" onerror="this.src='https://placehold.co/400x400/034B22/FFFFFF?text=E-CM+Produit'" class="w-full h-full object-cover" />
+              <span class="absolute top-3 right-3 bg-emerald-500/90 backdrop-blur-md text-white text-[10px] font-extrabold px-3 py-1 rounded-full shadow-sm">
+                En stock
+              </span>
+            </div>
+          </div>
+
+          <div class="px-4 space-y-3">
+            <div>
+              <h2 class="text-lg font-black text-slate-900">${product.name}</h2>
+              <div class="flex items-center space-x-2 mt-1">
+                <div class="flex items-center text-amber-400">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
+                  <span class="text-xs font-bold text-slate-800 ml-1">${product.rating || 4.8}</span>
+                </div>
+                <span class="text-slate-300">•</span>
+                <span class="text-xs text-slate-400 font-medium">(${product.reviewsCount || 128} avis vérifiés)</span>
+              </div>
+            </div>
+
+            <div class="bg-ecm-green-soft p-3.5 rounded-2xl border border-emerald-200/60 flex items-center justify-between">
+              <div>
+                <p class="text-[9px] text-ecm-green font-extrabold uppercase tracking-wider">Prix de vente E-CM</p>
+                <p class="text-xl font-black text-ecm-green">${formatPrice(product.price)}</p>
+              </div>
+              ${product.oldPrice ? `<span class="text-xs text-slate-400 line-through font-medium">${formatPrice(product.oldPrice)}</span>` : ''}
+            </div>
+
+            <div class="space-y-1">
+              <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider">Description</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">${product.description}</p>
+            </div>
+
+            <div class="space-y-2 pt-1">
+              <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider">Spécifications techniques</h3>
+              <ul class="space-y-1.5">
+                ${(product.specs || ['Qualité sélectionnée par Issa Camara', 'Garantie officielle E-CM']).map(spec => `
+                  <li class="flex items-center text-xs text-slate-600 space-x-2">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5 text-ecm-green shrink-0"></i>
+                    <span>${spec}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+
+            <div class="pt-4 flex items-center space-x-3">
+              <div class="flex items-center bg-slate-100 rounded-2xl p-1 border border-slate-200">
+                <button onclick="adjustDetailQty(-1)" class="w-8 h-8 rounded-xl bg-white shadow-sm flex items-center justify-center font-bold text-slate-800">-</button>
+                <span id="detail-qty" class="w-8 text-center text-xs font-extrabold text-slate-800">1</span>
+                <button onclick="adjustDetailQty(1)" class="w-8 h-8 rounded-xl bg-white shadow-sm flex items-center justify-center font-bold text-slate-800">+</button>
+              </div>
+
+              <button 
+                onclick="addDetailToCart('${product.id}')" 
+                class="flex-1 bg-ecm-green hover:bg-ecm-green-light text-white py-3.5 rounded-2xl font-bold text-xs shadow-lg flex items-center justify-center space-x-2 transition"
+              >
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                <span>Ajouter au panier</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+    }
+
+    let currentDetailQty = 1;
+    function adjustDetailQty(delta) {
+      currentDetailQty = Math.max(1, currentDetailQty + delta);
+      const el = document.getElementById('detail-qty');
+      if (el) el.textContent = currentDetailQty;
+    }
+
+    function addDetailToCart(productId) {
+      const existing = cart.find(i => i.id === productId);
+      if (existing) {
+        existing.qty += currentDetailQty;
+      } else {
+        const p = products.find(prod => prod.id === productId);
+        cart.push({ id: p.id, name: p.name, price: p.price, image: p.image, qty: currentDetailQty });
+      }
+      saveData();
+      showToast('Ajouté au panier !');
+      currentDetailQty = 1;
+    }
+
+    function renderCartScreen() {
+      const main = document.getElementById('main-content');
+      
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const shipping = cart.length > 0 ? 2000 : 0;
+      const total = subtotal + shipping;
+
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          
+          <div class="flex items-center justify-between pt-1">
+            <h1 class="text-lg font-extrabold text-slate-900">Mon panier</h1>
+            ${cart.length > 0 ? `
+              <button onclick="cart=[]; saveData(); renderCartScreen();" class="text-xs text-red-500 font-bold flex items-center space-x-1">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                <span>Vider</span>
+              </button>
+            ` : ''}
+          </div>
+
+          ${cart.length === 0 ? `
+            <div class="py-16 text-center space-y-3">
+              <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-400">
+                <i data-lucide="shopping-bag" class="w-8 h-8"></i>
+              </div>
+              <p class="text-sm font-bold text-slate-700">Votre panier est vide</p>
+              <p class="text-xs text-slate-400">Découvrez nos appareils de cuisine pour commencer votre commande.</p>
+              <button onclick="navigateTo('catalog')" class="mt-2 bg-ecm-green text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-md">
+                Parcourir les produits
+              </button>
+            </div>
+          ` : `
+            <div class="space-y-3">
+              ${cart.map(item => `
+                <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between space-x-3">
+                  <img src="${item.image}" class="w-16 h-16 object-cover rounded-xl border border-slate-100 shrink-0" />
+                  
+                  <div class="flex-1 space-y-1">
+                    <h4 class="text-xs font-bold text-slate-800 line-clamp-1">${item.name}</h4>
+                    <p class="text-xs font-black text-ecm-green">${formatPrice(item.price)}</p>
+                    
+                    <div class="flex items-center space-x-2 pt-1">
+                      <button onclick="updateCartQty('${item.id}', -1)" class="w-6 h-6 bg-slate-100 rounded-md font-bold text-xs flex items-center justify-center">-</button>
+                      <span class="text-xs font-extrabold text-slate-800 w-4 text-center">${item.qty}</span>
+                      <button onclick="updateCartQty('${item.id}', 1)" class="w-6 h-6 bg-slate-100 rounded-md font-bold text-xs flex items-center justify-center">+</button>
+                    </div>
+                  </div>
+
+                  <button onclick="removeCartItem('${item.id}')" class="p-2 text-slate-300 hover:text-red-500">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-2">
+              <div class="flex justify-between text-xs text-slate-500">
+                <span>Sous-total</span>
+                <span class="font-bold text-slate-800">${formatPrice(subtotal)}</span>
+              </div>
+              <div class="flex justify-between text-xs text-slate-500">
+                <span>Livraison (Ouagadougou)</span>
+                <span class="font-bold text-slate-800">${formatPrice(shipping)}</span>
+              </div>
+              <div class="border-t border-slate-100 pt-2 flex justify-between text-sm font-black text-slate-900">
+                <span>Total</span>
+                <span class="text-ecm-green">${formatPrice(total)}</span>
+              </div>
+            </div>
+
+            <button onclick="navigateTo('checkout-step1')" class="w-full bg-ecm-green hover:bg-ecm-green-light text-white py-3.5 rounded-2xl font-bold text-xs shadow-lg flex items-center justify-center space-x-2 transition">
+              <i data-lucide="lock" class="w-4 h-4"></i>
+              <span>Passer la commande</span>
+            </button>
+          `}
+
+        </div>
+      `;
+    }
+
+    function updateCartQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+        saveData();
+        renderCartScreen();
+      }
+    }
+
+    function removeCartItem(id) {
+      cart = cart.filter(i => i.id !== id);
+      saveData();
+      renderCartScreen();
+    }
+
+    function addToCart(productId) {
+      const p = products.find(item => item.id === productId);
+      if (!p) return;
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ id: p.id, name: p.name, price: p.price, image: p.image, qty: 1 });
+      }
+      saveData();
+      showToast('Ajouté au panier !');
+    }
+
+    function toggleFavorite(productId) {
+      if (favorites.includes(productId)) {
+        favorites = favorites.filter(id => id !== productId);
+        showToast('Retiré des favoris');
+      } else {
+        favorites.push(productId);
+        showToast('Ajouté aux favoris !');
+      }
+      saveData();
+      if (activeTab === 'favorites') renderFavoritesScreen();
+      else if (activeTab === 'home') renderHomeScreen();
+      else if (activeTab === 'catalog') renderCatalogScreen();
+    }
+
+    function renderCheckoutStep1() {
+      const main = document.getElementById('main-content');
+      
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          
+          <div class="flex items-center space-x-3 pt-1">
+            <button onclick="navigateTo('cart')" class="p-1 text-slate-600">
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-extrabold text-slate-900">Passer la commande</h1>
+          </div>
+
+          <!-- Step Indicator -->
+          <div class="flex items-center justify-between px-6 pt-1">
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-ecm-green text-white text-xs font-bold flex items-center justify-center">1</div>
+              <span class="text-[10px] font-bold text-ecm-green mt-1">Livraison</span>
+            </div>
+            <div class="h-0.5 flex-1 bg-slate-200 mx-2"></div>
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-500 text-xs font-bold flex items-center justify-center">2</div>
+              <span class="text-[10px] font-medium text-slate-400 mt-1">Paiement</span>
+            </div>
+            <div class="h-0.5 flex-1 bg-slate-200 mx-2"></div>
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-500 text-xs font-bold flex items-center justify-center">3</div>
+              <span class="text-[10px] font-medium text-slate-400 mt-1">Confirmation</span>
+            </div>
+          </div>
+
+          <!-- Address Select -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-2">
+            <h3 class="text-xs font-extrabold text-slate-800 flex items-center space-x-1.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-ecm-green"></i>
+              <span>Adresse de livraison</span>
+            </h3>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs flex justify-between items-center">
+              <div>
+                <p class="font-bold text-slate-800">Ouagadougou, Burkina Faso</p>
+                <p class="text-[10px] text-slate-400 mt-0.5">Livraison rapide disponible dans toute la ville</p>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+            </div>
+          </div>
+
+          <!-- Delivery Mode -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+            <h3 class="text-xs font-extrabold text-slate-800">Mode de livraison</h3>
+            
+            <label class="flex items-center justify-between p-3 rounded-xl border-2 border-ecm-green bg-emerald-50/20 cursor-pointer">
+              <div class="flex items-center space-x-3">
+                <input type="radio" name="shipping" checked class="accent-ecm-green">
+                <div>
+                  <p class="text-xs font-bold text-slate-800">Livraison à domicile</p>
+                  <p class="text-[10px] text-slate-400">Livraison sous 24h - 48h</p>
+                </div>
+              </div>
+              <span class="text-xs font-black text-ecm-green">2 000 F CFA</span>
+            </label>
+
+            <label class="flex items-center justify-between p-3 rounded-xl border border-slate-200 cursor-pointer">
+              <div class="flex items-center space-x-3">
+                <input type="radio" name="shipping" class="accent-ecm-green">
+                <div>
+                  <p class="text-xs font-bold text-slate-800">Retrait au Magasin E-CM</p>
+                  <p class="text-[10px] text-slate-400">Ouagadougou, Zone Commerciale</p>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-emerald-600">Gratuit</span>
+            </label>
+          </div>
+
+          <!-- Customer Info -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+            <h3 class="text-xs font-extrabold text-slate-800">Informations du client</h3>
+            <div class="space-y-2 text-xs">
+              <div>
+                <label class="block text-[10px] text-slate-500 font-bold mb-1">Nom complet</label>
+                <input id="checkout-name" type="text" value="Client E-CM" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-ecm-green">
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-500 font-bold mb-1">Numéro de Téléphone</label>
+                <input id="checkout-phone" type="text" value="+226 70 12 34 56" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-ecm-green">
+              </div>
+            </div>
+          </div>
+
+          <button onclick="navigateTo('checkout-step2')" class="w-full bg-ecm-green hover:bg-ecm-green-light text-white py-3.5 rounded-2xl font-bold text-xs shadow-lg flex items-center justify-center space-x-1 transition">
+            <span>Passer au paiement</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+
+        </div>
+      `;
+    }
+
+    let selectedPayment = 'Orange Money';
+    function renderCheckoutStep2() {
+      const main = document.getElementById('main-content');
+      
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const shipping = 2000;
+      const total = subtotal + shipping;
+
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          
+          <div class="flex items-center space-x-3 pt-1">
+            <button onclick="navigateTo('checkout-step1')" class="p-1 text-slate-600">
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-extrabold text-slate-900">Paiement sécurisé</h1>
+          </div>
+
+          <!-- Step Indicator -->
+          <div class="flex items-center justify-between px-6 pt-1">
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-ecm-green text-white text-xs font-bold flex items-center justify-center">✓</div>
+              <span class="text-[10px] font-bold text-ecm-green mt-1">Livraison</span>
+            </div>
+            <div class="h-0.5 flex-1 bg-ecm-green mx-2"></div>
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-ecm-green text-white text-xs font-bold flex items-center justify-center">2</div>
+              <span class="text-[10px] font-bold text-ecm-green mt-1">Paiement</span>
+            </div>
+            <div class="h-0.5 flex-1 bg-slate-200 mx-2"></div>
+            <div class="flex flex-col items-center">
+              <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-500 text-xs font-bold flex items-center justify-center">3</div>
+              <span class="text-[10px] font-medium text-slate-400 mt-1">Confirmation</span>
+            </div>
+          </div>
+
+          <!-- Payment Options -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+            <h3 class="text-xs font-extrabold text-slate-800">Moyen de paiement</h3>
+
+            ${[
+              { name: 'Orange Money', icon: 'smartphone', color: 'bg-orange-500' },
+              { name: 'Moov Money', icon: 'smartphone', color: 'bg-blue-600' },
+              { name: 'Carte bancaire', icon: 'credit-card', color: 'bg-emerald-600' },
+              { name: 'Paiement à la livraison', icon: 'banknote', color: 'bg-slate-700' }
+            ].map(m => `
+              <label onclick="selectedPayment='${m.name}'" class="flex items-center justify-between p-3 rounded-xl border ${selectedPayment === m.name ? 'border-2 border-ecm-green bg-emerald-50/30' : 'border-slate-200'} cursor-pointer transition">
+                <div class="flex items-center space-x-3">
+                  <input type="radio" name="pay" ${selectedPayment === m.name ? 'checked' : ''} class="accent-ecm-green">
+                  <div class="w-7 h-7 rounded-lg ${m.color} text-white flex items-center justify-center">
+                    <i data-lucide="${m.icon}" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-xs font-bold text-slate-800">${m.name}</span>
+                </div>
+              </label>
+            `).join('')}
+          </div>
+
+          <!-- Summary -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-2">
+            <h3 class="text-xs font-extrabold text-slate-800 mb-2">Récapitulatif final</h3>
+            <div class="flex justify-between text-xs text-slate-500">
+              <span>Articles (${cart.length})</span>
+              <span class="font-bold text-slate-800">${formatPrice(subtotal)}</span>
+            </div>
+            <div class="flex justify-between text-xs text-slate-500">
+              <span>Frais de livraison</span>
+              <span class="font-bold text-slate-800">${formatPrice(shipping)}</span>
+            </div>
+            <div class="border-t border-slate-100 pt-2 flex justify-between text-sm font-black text-slate-900">
+              <span>Montant Total</span>
+              <span class="text-ecm-green">${formatPrice(total)}</span>
+            </div>
+          </div>
+
+          <button onclick="processOrder()" class="w-full bg-ecm-green hover:bg-ecm-green-light text-white py-3.5 rounded-2xl font-bold text-xs shadow-lg flex items-center justify-center space-x-2 transition">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            <span>Payer maintenant (${formatPrice(total)})</span>
+          </button>
+
+          <p class="text-[10px] text-center text-slate-400 flex items-center justify-center space-x-1">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <span>Garantie de transaction sécurisée par E-CM.</span>
+          </p>
+
+        </div>
+      `;
+    }
+
+    function processOrder() {
+      const orderNum = 'E-CM' + Math.floor(10000000 + Math.random() * 90000000);
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const shipping = 2000;
+      
+      const newOrder = {
+        id: orderNum,
+        date: new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }) + ' - ' + new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
+        status: 'Commande confirmée',
+        items: [...cart],
+        subtotal: subtotal,
+        shipping: shipping,
+        total: subtotal + shipping,
+        address: 'Ouagadougou, Burkina Faso',
+        paymentMethod: selectedPayment
+      };
+
+      orders.unshift(newOrder);
+      cart = [];
+      saveData();
+
+      navigateTo('order-success', newOrder);
+    }
+
+    function renderOrderSuccessScreen(order) {
+      const main = document.getElementById('main-content');
+      
+      main.innerHTML = `
+        <div class="h-full bg-gradient-to-b from-ecm-green-dark via-ecm-green to-ecm-green text-white p-6 flex flex-col justify-between items-center text-center screen-fade">
+          
+          <div class="pt-8 space-y-4">
+            <div class="w-20 h-20 bg-emerald-500/20 border-2 border-emerald-400 rounded-full flex items-center justify-center mx-auto shadow-2xl">
+              <i data-lucide="check" class="w-10 h-10 text-emerald-400"></i>
+            </div>
+            
+            <h1 class="text-2xl font-black">Commande confirmée !</h1>
+            <p class="text-xs text-emerald-100">
+              Merci pour votre achat chez E-CM<br>
+              <span class="font-mono font-bold text-white text-sm">N° ${order.id}</span>
+            </p>
+            <p class="text-[11px] text-emerald-200">Votre commande est en traitement par l'équipe de Issa Camara.</p>
+          </div>
+
+          <div class="w-full space-y-2.5">
+            <button onclick="navigateTo('order-tracking', '${order.id}')" class="w-full bg-white text-ecm-green py-3.5 rounded-2xl font-bold text-xs shadow-lg hover:bg-emerald-50 transition">
+              Suivre ma commande
+            </button>
+            <button onclick="navigateTo('home')" class="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 py-3 rounded-2xl font-bold text-xs transition">
+              Retour au catalogue
+            </button>
+          </div>
+
+          <div class="pt-4 border-t border-white/10 w-full flex justify-around text-xs">
+            <a href="https://wa.me/22670123456" target="_blank" class="flex items-center space-x-1 text-emerald-200 hover:text-white">
+              <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+              <span>WhatsApp Client</span>
+            </a>
+            <a href="tel:+22670123456" class="flex items-center space-x-1 text-emerald-200 hover:text-white">
+              <i data-lucide="phone" class="w-4 h-4 text-emerald-400"></i>
+              <span>Appel Direct</span>
+            </a>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function renderOrderTrackingScreen(orderId) {
+      const main = document.getElementById('main-content');
+      const order = orders.find(o => o.id === orderId) || orders[0];
+
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          
+          <div class="flex items-center justify-between pt-1">
+            <button onclick="navigateTo('account')" class="p-1 text-slate-600">
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-extrabold text-slate-900">Suivi de la commande</h1>
+            <div></div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex justify-between items-center">
+            <div>
+              <p class="text-[10px] text-slate-400 font-bold uppercase">Référence N°</p>
+              <p class="text-sm font-black font-mono text-ecm-green">${order.id}</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">${order.date}</p>
+            </div>
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-3 py-1 rounded-full border border-emerald-200">
+              ${order.status}
+            </span>
+          </div>
+
+          <!-- Timeline -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+            <h3 class="text-xs font-extrabold text-slate-800">Évolution de la livraison</h3>
+
+            <div class="relative pl-6 space-y-6 border-l-2 border-emerald-500 ml-2">
+              <div class="relative">
+                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow"></div>
+                <h4 class="text-xs font-bold text-slate-800">Commande enregistrée</h4>
+                <p class="text-[10px] text-slate-400">${order.date}</p>
+              </div>
+
+              <div class="relative">
+                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow"></div>
+                <h4 class="text-xs font-bold text-slate-800">En préparation</h4>
+                <p class="text-[10px] text-slate-400">Préparation dans l'entrepôt E-CM</p>
+              </div>
+
+              <div class="relative">
+                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-slate-200 border-2 border-white"></div>
+                <h4 class="text-xs font-bold text-slate-400">En cours de livraison</h4>
+                <p class="text-[10px] text-slate-400">Livreur en route vers votre domicile</p>
+              </div>
+
+              <div class="relative">
+                <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-slate-200 border-2 border-white"></div>
+                <h4 class="text-xs font-bold text-slate-400">Livrée</h4>
+                <p class="text-[10px] text-slate-400">Arrivée estimée à Ouagadougou</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ordered Items -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+            <h3 class="text-xs font-extrabold text-slate-800">Détail du colis</h3>
+            <div class="space-y-2">
+              ${order.items.map(item => `
+                <div class="flex items-center justify-between text-xs">
+                  <div class="flex items-center space-x-2">
+                    <img src="${item.image}" class="w-10 h-10 object-cover rounded-lg border border-slate-100" />
+                    <div>
+                      <p class="font-bold text-slate-800 line-clamp-1">${item.name}</p>
+                      <p class="text-[10px] text-slate-400">Qté: ${item.qty}</p>
+                    </div>
+                  </div>
+                  <span class="font-extrabold text-ecm-green">${formatPrice(item.price * item.qty)}</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="border-t border-slate-100 pt-2 flex justify-between text-xs font-black text-slate-900">
+              <span>Total Réglé</span>
+              <span class="text-ecm-green">${formatPrice(order.total)}</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/22670123456" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-xs shadow flex items-center justify-center space-x-2 transition block text-center">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <span>Contacter le support client</span>
+          </a>
+
+        </div>
+      `;
+    }
+
+    function renderAccountScreen() {
+      const main = document.getElementById('main-content');
+
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          
+          <h1 class="text-lg font-extrabold text-slate-900 pt-1">Mon compte</h1>
+
+          <!-- Profile Badge -->
+          <div class="bg-gradient-to-r from-ecm-green via-ecm-green-light to-emerald-800 p-4 rounded-3xl text-white flex items-center space-x-3.5 shadow-md relative overflow-hidden">
+            <div class="w-12 h-12 rounded-full bg-white/20 border-2 border-white/40 flex items-center justify-center text-base font-black shrink-0">
+              IC
+            </div>
+            <div>
+              <div class="flex items-center space-x-1.5">
+                <h2 class="text-sm font-extrabold">Issa Camara</h2>
+                <span class="bg-emerald-400/30 text-emerald-200 text-[9px] font-black px-2 py-0.5 rounded-md uppercase">Créateur</span>
+              </div>
+              <p class="text-[10px] text-emerald-100">issacamara@gmail.com</p>
+              <p class="text-[9px] text-emerald-200 mt-0.5">Propriétaire exclusif de l'application E-CM</p>
+            </div>
+          </div>
+
+          <!-- Restricted Admin Shortcut Card -->
+          <div onclick="openAdminLockModal()" class="bg-slate-900 text-white p-3.5 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-slate-800 transition border border-slate-800 shadow-md">
+            <div class="flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-ecm-orange text-white flex items-center justify-center shadow-sm">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-white flex items-center space-x-1">
+                  <span>Espace Administrateur</span>
+                  <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
+                </p>
+                <p class="text-[10px] text-slate-400">Réservé exclusivement à Issa Camara</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+          </div>
+
+          <!-- Account Links -->
+          <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden divide-y divide-slate-100 text-xs font-bold text-slate-700">
+            <button onclick="navigateTo('order-tracking', '${orders[0]?.id}')" class="w-full p-3.5 flex items-center justify-between hover:bg-slate-50">
+              <div class="flex items-center space-x-3">
+                <i data-lucide="package" class="w-4 h-4 text-ecm-green"></i>
+                <span>Mes commandes (${orders.length})</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+            </button>
+
+            <button onclick="navigateTo('favorites')" class="w-full p-3.5 flex items-center justify-between hover:bg-slate-50">
+              <div class="flex items-center space-x-3">
+                <i data-lucide="heart" class="w-4 h-4 text-ecm-green"></i>
+                <span>Mes favoris (${favorites.length})</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+            </button>
+
+            <button onclick="navigateTo('notifications')" class="w-full p-3.5 flex items-center justify-between hover:bg-slate-50">
+              <div class="flex items-center space-x-3">
+                <i data-lucide="bell" class="w-4 h-4 text-ecm-green"></i>
+                <span>Notifications</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+            </button>
+
+            <button onclick="navigateTo('contact')" class="w-full p-3.5 flex items-center justify-between hover:bg-slate-50">
+              <div class="flex items-center space-x-3">
+                <i data-lucide="headphones" class="w-4 h-4 text-ecm-green"></i>
+                <span>Contact & Service Client</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+            </button>
+          </div>
+
+          <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-100 text-center">
+            <p class="text-[10px] text-emerald-800 font-medium">
+              E-CM est édité exclusivement par <strong class="font-bold">Issa Camara</strong>. Seul Issa Camara est autorisé à modifier le catalogue et les paramètres de l'application.
+            </p>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function renderFavoritesScreen() {
+      const main = document.getElementById('main-content');
+      const favProducts = products.filter(p => favorites.includes(p.id));
+
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          <div class="flex items-center space-x-3 pt-1">
+            <button onclick="navigateTo('account')" class="p-1 text-slate-600">
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-extrabold text-slate-900">Mes articles favoris</h1>
+          </div>
+
+          ${favProducts.length === 0 ? `
+            <div class="py-16 text-center space-y-2">
+              <i data-lucide="heart-off" class="w-10 h-10 text-slate-300 mx-auto"></i>
+              <p class="text-xs font-bold text-slate-500">Aucun produit dans vos favoris</p>
+            </div>
+          ` : `
+            <div class="grid grid-cols-2 gap-3">
+              ${favProducts.map(p => renderProductCard(p)).join('')}
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    function renderNotificationsScreen() {
+      const main = document.getElementById('main-content');
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          <div class="flex items-center space-x-3 pt-1">
+            <button onclick="navigateTo('account')" class="p-1 text-slate-600">
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-extrabold text-slate-900">Notifications</h1>
+          </div>
+
+          <div class="space-y-3">
+            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-start space-x-3">
+              <div class="w-8 h-8 rounded-xl bg-orange-100 text-ecm-orange flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="tag" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-800">Promotion Cuisine</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">Profitez de réductions sur tous les appareils électroménagers sélectionnés par Issa Camara.</p>
+                <span class="text-[9px] text-slate-400 mt-1 block font-medium">Aujourd'hui</span>
+              </div>
+            </div>
+
+            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-start space-x-3">
+              <div class="w-8 h-8 rounded-xl bg-emerald-100 text-ecm-green flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="package" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-slate-800">Suivi de commande</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">Votre commande N° E-CM20250926 est en cours de préparation dans nos locaux.</p>
+                <span class="text-[9px] text-slate-400 mt-1 block font-medium">Il y a 3 heures</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderContactScreen() {
+      const main = document.getElementById('main-content');
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          <div class="flex items-center space-x-3 pt-1">
+            <button onclick="navigateTo('account')" class="p-1 text-slate-600">
+              <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-extrabold text-slate-900">Nous contacter</h1>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+            <a href="https://wa.me/22670123456" target="_blank" class="flex items-center space-x-3 p-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition">
+              <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-800">WhatsApp Direct</p>
+                <p class="text-[10px] text-slate-500">+226 70 12 34 56</p>
+              </div>
+            </a>
+
+            <a href="tel:+22670123456" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition">
+              <div class="w-10 h-10 rounded-xl bg-ecm-green text-white flex items-center justify-center shrink-0">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Service Client Téléphonique</p>
+                <p class="text-[10px] text-slate-500">+226 70 12 34 56</p>
+              </div>
+            </a>
+
+            <div class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50">
+              <div class="w-10 h-10 rounded-xl bg-slate-800 text-white flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-800">Siège E-CM</p>
+                <p class="text-[10px] text-slate-500">Ouagadougou, Burkina Faso</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    let editingProductId = null;
+
+    function renderAdminScreen() {
+      const main = document.getElementById('main-content');
+
+      // Double-check security
+      if (!isAdminUnlocked) {
+        openAdminLockModal();
+        return;
+      }
+
+      const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+
+      main.innerHTML = `
+        <div class="p-4 space-y-4 screen-fade">
+          
+          <!-- Admin Top Header -->
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center space-x-2">
+              <button onclick="navigateTo('home')" class="p-1 text-slate-600">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+              </button>
+              <div>
+                <h1 class="text-base font-extrabold text-slate-900">Espace Administrateur</h1>
+                <p class="text-[10px] text-ecm-green font-bold">Session active : Issa Camara</p>
+              </div>
+            </div>
+            <button onclick="isAdminUnlocked=false; navigateTo('home'); showToast('Session admin fermée');" class="bg-red-50 text-red-600 p-2 rounded-xl text-[10px] font-bold border border-red-200">
+              Déconnexion
+            </button>
+          </div>
+
+          <!-- Stats Dashboard -->
+          <div class="grid grid-cols-3 gap-2">
+            <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm text-center">
+              <p class="text-[9px] text-slate-400 font-bold uppercase">Articles</p>
+              <p class="text-base font-black text-ecm-green mt-0.5">${products.length}</p>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm text-center">
+              <p class="text-[9px] text-slate-400 font-bold uppercase">Ventes</p>
+              <p class="text-base font-black text-ecm-orange mt-0.5">${orders.length}</p>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm text-center">
+              <p class="text-[9px] text-slate-400 font-bold uppercase">Chiffre d'aff.</p>
+              <p class="text-[10px] font-black text-slate-800 mt-1 truncate">${formatPrice(totalRevenue)}</p>
+            </div>
+          </div>
+
+          <!-- Product Management Form -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+              <h3 class="text-xs font-extrabold text-slate-800">
+                ${editingProductId ? 'Modifier un article (Issa Camara)' : 'Ajouter un article au catalogue'}
+              </h3>
+              ${editingProductId ? `
+                <button onclick="resetAdminForm()" class="text-[10px] text-red-500 font-bold">Annuler</button>
+              ` : ''}
+            </div>
+
+            <form onsubmit="handleProductSubmit(event)" class="space-y-2.5 text-xs">
+              <div>
+                <label class="block text-[10px] text-slate-500 font-bold mb-1">Nom du produit *</label>
+                <input id="admin-name" type="text" required placeholder="ex: Friteuse sans huile 8L" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-ecm-green">
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[10px] text-slate-500 font-bold mb-1">Prix (F CFA) *</label>
+                  <input id="admin-price" type="number" required placeholder="69900" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-ecm-green">
+                </div>
+                <div>
+                  <label class="block text-[10px] text-slate-500 font-bold mb-1">Ancien Prix (FCFA)</label>
+                  <input id="admin-old-price" type="number" placeholder="79900" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-ecm-green">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[10px] text-slate-500 font-bold mb-1">Catégorie *</label>
+                <select id="admin-category" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-ecm-green">
+                  <option value="Ustensiles">Ustensiles de cuisine</option>
+                  <option value="Electromenager">Électroménager</option>
+                  <option value="Petits appareils">Petits appareils</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[10px] text-slate-500 font-bold mb-1">Lien de la photo (URL) *</label>
+                <input id="admin-image" type="url" required placeholder="https://images.unsplash.com/..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-ecm-green">
+              </div>
+
+              <div>
+                <label class="block text-[10px] text-slate-500 font-bold mb-1">Description du produit</label>
+                <textarea id="admin-description" rows="2" placeholder="Saisir la description..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-ecm-green"></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-ecm-orange hover:bg-ecm-orange-hover text-white py-3 rounded-xl font-bold text-xs shadow-md transition">
+                ${editingProductId ? 'Mettre à jour l\'article' : 'Publier le produit'}
+              </button>
+            </form>
+          </div>
+
+          <!-- Product CRUD List -->
+          <div class="space-y-2">
+            <h3 class="text-xs font-extrabold text-slate-800">Gestion des articles (${products.length})</h3>
+
+            <div class="space-y-2">
+              ${products.map(p => `
+                <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between space-x-3">
+                  <img src="${p.image}" onerror="this.src='https://placehold.co/100x100/034B22/FFFFFF?text=E-CM'" class="w-12 h-12 object-cover rounded-xl border border-slate-100 shrink-0" />
+
+                  <div class="flex-1 min-w-0">
+                    <h4 class="text-xs font-bold text-slate-800 truncate">${p.name}</h4>
+                    <p class="text-xs font-black text-ecm-green">${formatPrice(p.price)}</p>
+                    <span class="text-[9px] text-slate-400 font-medium">${p.category}</span>
+                  </div>
+
+                  <div class="flex items-center space-x-1 shrink-0">
+                    <button onclick="editProduct('${p.id}')" class="p-2 text-slate-600 hover:text-ecm-green bg-slate-50 rounded-lg">
+                      <i data-lucide="edit-3" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="deleteProduct('${p.id}')" class="p-2 text-slate-600 hover:text-red-500 bg-slate-50 rounded-lg">
+                      <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function handleProductSubmit(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('admin-name').value;
+      const price = parseFloat(document.getElementById('admin-price').value);
+      const oldPrice = parseFloat(document.getElementById('admin-old-price').value) || null;
+      const category = document.getElementById('admin-category').value;
+      const image = document.getElementById('admin-image').value;
+      const description = document.getElementById('admin-description').value || 'Produit certifié E-CM par Issa Camara.';
+
+      if (editingProductId) {
+        const index = products.findIndex(p => p.id === editingProductId);
+        if (index !== -1) {
+          products[index] = { ...products[index], name, price, oldPrice, category, image, description };
+          showToast('Produit mis à jour par Issa Camara');
+        }
+        editingProductId = null;
+      } else {
+        const newProd = {
+          id: 'prod-' + Date.now(),
+          name,
+          price,
+          oldPrice,
+          category,
+          image,
+          badge: 'Nouveau',
+          rating: 5.0,
+          reviewsCount: 1,
+          description,
+          specs: ['Garantie Qualité Issa Camara', 'Produit Authentique E-CM']
+        };
+        products.unshift(newProd);
+        showToast('Article ajouté au catalogue E-CM !');
+      }
+
+      saveData();
+      renderAdminScreen();
+      lucide.createIcons();
+    }
+
+    function editProduct(id) {
+      const p = products.find(prod => prod.id === id);
+      if (!p) return;
+
+      editingProductId = id;
+      renderAdminScreen();
+
+      document.getElementById('admin-name').value = p.name;
+      document.getElementById('admin-price').value = p.price;
+      document.getElementById('admin-old-price').value = p.oldPrice || '';
+      document.getElementById('admin-category').value = p.category;
+      document.getElementById('admin-image').value = p.image;
+      document.getElementById('admin-description').value = p.description || '';
+      
+      lucide.createIcons();
+    }
+
+    function resetAdminForm() {
+      editingProductId = null;
+      renderAdminScreen();
+      lucide.createIcons();
+    }
+
+    function deleteProduct(id) {
+      if (confirm('Êtes-vous sûr de vouloir supprimer cet article du catalogue E-CM ?')) {
+        products = products.filter(p => p.id !== id);
+        saveData();
+        showToast('Article supprimé du catalogue');
+        renderAdminScreen();
+        lucide.createIcons();
+      }
+    }
+
+    window.onload = function() {
+      setInterval(() => {
+        const timeEl = document.getElementById('current-time');
+        if (timeEl) {
+          const now = new Date();
+          timeEl.textContent = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+        }
+      }, 1000);
+
+      updateCartBadge();
+      navigateTo('home');
+    };
+  </script>
+</body>
+</html>
